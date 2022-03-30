@@ -45,6 +45,7 @@ body {
   font-size: 32px;
   text-align: center;
   border-radius: 5%;
+  cursor: pointer;
 }
 .question-wrapper {
   height: 100%;
@@ -68,15 +69,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 }
 .body h3 {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-size: 34px;
   padding: 2rem;
+  height: 100px;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 .answers {
   width: 400px;
-  height: 200px;
+  height: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -86,6 +92,7 @@ body {
 }
 .field {
   width: 200px;
+  max-height: 200px;
   background-color: var(--blue);
   color: var(--green);
   margin: 3rem 2rem;
@@ -97,9 +104,15 @@ body {
 .end {
   font-size: 128px;
   text-align: center;
-  margin-top: 15rem;
+  position: relative;
+  top: 38%;
   font-weight: bold;
   text-decoration: none;
-  border: none;
   color: var(--blue);
+}
+.right {
+  background-color: green;
+}
+.none {
+  display: none;
 }

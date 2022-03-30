@@ -10,7 +10,10 @@ let drei;
 let vier;
 let number;
 
+let border;
 let right_answers = 0;
+
+let timer = 10;
 
 let ob = {
   1: "e",
@@ -46,17 +49,25 @@ function displayQuestion() {
   let inner = ` <div class="question-wrapper">
                 <div class="border-upper">
                 <div class="upper">
-                <p>Question 1/10</p>
-                <p>Time Left: 10</p>
+                <p>Question ${question + 1}/10</p>
+                <p></p>
                 </div>
                 </div>
                 <div class="body">
                 <h3>${data[question].question}</h3>
                 <div class="answers">
-                <div class="field e" onclick="check(this)">${ans_eins}</div>
-                <div class="field z" onclick="check(this)">${ans_zwei}</div>
-                <div class="field d" onclick="check(this)">${ans_drei}</div>
-                <div class="field v" onclick="check(this)">${ans_vier}</div>
+                <div class="field e" onclick="check(this)">${
+                  ans_eins ? ans_eins : ""
+                }</div>
+                <div class="field z" onclick="check(this)">${
+                  ans_zwei ? ans_zwei : ""
+                }</div>
+                <div class="field d" onclick="check(this)">${
+                  ans_drei ? ans_drei : ""
+                }</div>
+                <div class="field v ${
+                  !ans_vier ? "none" : ""
+                }" onclick="check(this)">${ans_vier ? ans_vier : ""}</div>
                 </div></div>
                 </div>`;
   wrapper.innerHTML += inner;
@@ -64,18 +75,30 @@ function displayQuestion() {
   eins = document.querySelector(".z");
   eins = document.querySelector(".d");
   eins = document.querySelector(".v");
+  border = document.querySelector(".border-upper");
+  setInterval(checkTime, 1000);
 }
 
 function check(e) {
   question++;
   if (question < data.length) {
-    displayQuestion();
     if (e.classList.contains(ob[number])) {
       right_answers += 1;
+      e.classList.add("right");
+      setTimeout(() => "", 1000);
+      displayQuestion();
     }
+    setTimeout(() => "", 1000);
+    displayQuestion();
     return "";
   }
   wrapper.innerHTML = `<a href="#" class="end"><div >${right_answers} / ${data.length}</div></a>`;
+}
+function checkTime() {
+  if (border.offsetWidth > 700) {
+    question++;
+    displayQuestion();
+  }
 }
 
 /*
